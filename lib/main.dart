@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weather_app/screens/home_page.dart';
+import 'package:flutter_weather_app/utility/bloc/weather_bloc.dart';
+import 'package:flutter_weather_app/utility/bloc/weather_event.dart';
+import 'package:flutter_weather_app/utility/bloc/weather_state.dart';
+import 'package:flutter_weather_app/utility/weather_repo.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,13 +14,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
         primaryColor: Colors.white,
       ),
-      home: HomePage(),
+      home: BlocProvider(
+          create: (BuildContext context) =>
+              WeatherBloc(WeatherState(), WeatherRepo())
+                ..add(ResetWeatherEvent()),
+          child: HomePage()),
     );
   }
 }
-
-// http://api.openweathermap.org/data/2.5/weather?q=dharan&appid=4283dbbbef485370df831fdd08734659&units=metric
