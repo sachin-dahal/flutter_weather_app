@@ -79,9 +79,8 @@ class HomePage extends StatelessWidget {
                         minWidth: double.infinity,
                         height: 50.0,
                         child: RaisedButton(
-                          onPressed: () => weatherBloc.add(
-                            FetchWeatherEvent(_cityController.text),
-                          ),
+                          onPressed: () => weatherBloc
+                              .add(FetchWeatherEvent(_cityController.text)),
                           child: Text(
                             "Search",
                             style: TextStyle(fontSize: 20.0),
@@ -96,13 +95,13 @@ class HomePage extends StatelessWidget {
                 );
               } else if (state is WeatherIsLoading) {
                 return Center(
-                  child: CupertinoActivityIndicator(radius: 25.0),
+                  child: CupertinoActivityIndicator(radius: 20.0),
                 );
               } else if (state is WeatherIsLoaded) {
                 return WeatherPage(state.weatherModel, _cityController.text);
               }
               return Center(
-                child: Text("Error Occured!"),
+                child: Text("Some Error Occured!"),
               );
             },
           ),

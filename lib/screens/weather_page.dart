@@ -73,9 +73,7 @@ class WeatherPage extends StatelessWidget {
               child: FlatButton(
                 shape: new RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
-                onPressed: () {
-                  weatherBloc.add(ResetWeatherEvent());
-                },
+                onPressed: () => weatherBloc.add(ResetWeatherEvent()),
                 color: Colors.lightBlue,
                 child: Text(
                   "Search",
